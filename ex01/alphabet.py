@@ -34,13 +34,13 @@ if __name__ == "__main__":
     #デバッグ用
     print("欠損")
     l = random.randint(1,len(n)-1)
-    n_c = n #表示文字用変数
+    n_c = set(n) #表示文字用変数
     n_v = set() #欠損文字
     for _ in range(l):
         ja = random.choice(n_c)
         n_c.remove(ja)
         n_v.add(ja)
-    print(n_v)
+    print(chr(n_v))
     print("表示文字")
     for h in n:
         print(chr(h),end=" ")
@@ -53,8 +53,13 @@ if __name__ == "__main__":
                 n_vc = n_v
                 for df in range(len(n_v)):
                     kai = int(input(f"{df}つ目の文字を入力してください："))
-                    if kai in n_vc:
+                    if ord(kai) in n_vc:
                         print("正解です")
+                    else:
+                        print("間違いです。やり直してください")
+                        break
+                break
+            break
         except:
             print("数字を入力してください")
 
