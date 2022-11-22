@@ -57,4 +57,4 @@ if __name__ == "__main__":
             print("数字を入力してください")
 
     gt = datetime.datetime.now()
-    print(gt-st,"秒")
+    print(str(str((gt - st).seconds) + "秒")
