@@ -1,9 +1,6 @@
 import random
 import datetime
 
-
-
-
 def af():
     num = set()
     while True:
@@ -16,12 +13,8 @@ def af():
             break
     return num
 
-
 #グローバル変数：
 #全てメインの中にあります。
-
-
-
 
 if __name__ == "__main__":
     st = datetime.datetime.now()
