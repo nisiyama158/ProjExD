@@ -10,7 +10,11 @@ root = tk.Tk()
 root.title("calc")
 root.geometry("300x500")
 
-r,c = 0,0
+entry = tk.Entry(justify="right",width=10,font=("",40))
+entry.grid(columnspan=3)
+entry.grid()
+
+r,c = 1,0
 for i in range(10)[::-1]:
     button = tk.Button(root,text=i,font=("",30),width=4,height=2,command=button_click)
     button.grid(row = r,column = c)
