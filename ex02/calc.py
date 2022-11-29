@@ -9,6 +9,9 @@ def button_click(event):
 def new_func(txt):
     entry.insert(tk.END,txt)
 
+def button_sum(event):
+    pass
+
 root = tk.Tk()
 root.title("calc")
 root.geometry("300x500")
@@ -19,21 +22,21 @@ entry.grid()
 
 r,c = 1,0
 for i in range(10)[::-1]:
-    button = tk.Button(root,text=i,font=("",30),width=4,height=2,command=button_click)
-    button.grid(row = r,column = c)
+    button = tk.Button(root,text=i,font=("",30),width=4,height=2)
     button.bind("<1>",button_click)
-    button.grid()
+    button.grid(row = r,column = c)
+    
     c += 1
     if c==3:
         c=0
         r+=1
 
 button = tk.Button(root,text="+",font=("",30),width=4,height=2)
+button.bind("<1>",button_click)
 button.grid(row = r,column = c)
-button.grid()
 c+=1
 button = tk.Button(root,text="=",font=("",30),width=4,height=2)
+button.bind("<1>",button_sum)
 button.grid(row = r,column = c)
-button.grid()
 
 root.mainloop()
