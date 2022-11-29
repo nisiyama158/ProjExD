@@ -9,16 +9,7 @@ def button_click(event):
 root = tk.Tk()
 root.title("calc")
 root.geometry("300x500")
-r,c = 0,0
-for i in range(10)[::-1]:
-    button = tk.Button(root,text=i,font=("",30),widht = 4,height = 2)
-    button.grid(row = r,column = c)
-    button.bind("<1>",button_click)
-    button.pack()
-    c += 1
-    if c==3:
-        c=0
-        r+=1
+
 
 
 root.mainloop()
