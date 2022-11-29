@@ -25,4 +25,12 @@ for i in range(10)[::-1]:
         c=0
         r+=1
 
+button = tk.Button(root,text="+",font=("",30),width=4,height=2)
+button.grid(row = r,column = c)
+button.grid()
+c+=1
+button = tk.Button(root,text="=",font=("",30),width=4,height=2)
+button.grid(row = r,column = c)
+button.grid()
+
 root.mainloop()
