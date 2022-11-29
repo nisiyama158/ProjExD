@@ -15,35 +15,41 @@ def button_click(event):
             entry.insert(tk.END, "error")
             tkm.showinfo("error",f"エラーが起こりました")
             entry.delete(0,tk.END)
+    elif txt == "AC":
+        entry.delete(0,tk.END)
     else:
         entry.insert(tk.END,txt)
         
 
 root = tk.Tk()
 root.title("calc")
-root.geometry("300x500")
+root.geometry("380x500")
 
-entry = tk.Entry(justify="right",width=10,font=("",40))
-entry.grid(columnspan=3)
+entry = tk.Entry(justify="right",width=11,font=("",50))
+entry.grid(columnspan=10)
 entry.grid()
 
-r,c = 1,0
+r,c = 1,2
 for i in range(10)[::-1]:
     button = tk.Button(root,text=i,font=("",30),width=4,height=2)
     button.bind("<1>",button_click)
     button.grid(row = r,column = c)
     
-    c += 1
-    if c==3:
-        c=0
+    c -= 1
+    if c == -1:
+        c=2
         r+=1
+        if r == 4:
+            c=1
 
 button = tk.Button(root,text="+",font=("",30),width=4,height=2)
 button.bind("<1>",button_click)
-button.grid(row = r,column = c)
-c+=1
+button.grid(row = 2,column = 3)
 button = tk.Button(root,text="=",font=("",30),width=4,height=2)
 button.bind("<1>",button_click)
-button.grid(row = r,column = c)
+button.grid(row = 4,column = 3)
+button = tk.Button(root,text="AC",font=("",30),width=4,height=2)
+button.bind("<1>",button_click)
+button.grid(row = 1,column = 3)
 
 root.mainloop()
