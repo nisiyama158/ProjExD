@@ -15,7 +15,6 @@ def button_click(event):
         except:
             entry.insert(tk.END, "error")
             tkm.showinfo("error",f"エラーが起こりました")
-            entry.delete(0,tk.END)
     elif txt == "AC":
         entry.delete(0,tk.END)
     elif txt == "C":
