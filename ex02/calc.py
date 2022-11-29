@@ -4,7 +4,10 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
-    tkm.showinfo(txt,f"{txt}のボタンが押されました")
+    new_func(txt)
+
+def new_func(txt):
+    entry.insert(tk.END,txt)
 
 root = tk.Tk()
 root.title("calc")
