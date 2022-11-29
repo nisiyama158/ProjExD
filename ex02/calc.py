@@ -4,13 +4,20 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
-    entry.insert(tk.END,txt)
+    if txt == "=":
+        isum = entry.get()
+        entry.delete(0,tk.END)
+        try:
+            res = eval(isum)
+            entry.insert(tk.END, res)
 
-def button_sum(event):
-    isum = entry.get()
-    entry.delete(0,tk.END)
-    res = eval(isum)
-    entry.insert(tk.END, res)
+        except:
+            entry.insert(tk.END, "error")
+            tkm.showinfo("error",f"エラーが起こりました")
+            entry.delete(0,tk.END)
+    else:
+        entry.insert(tk.END,txt)
+        
 
 root = tk.Tk()
 root.title("calc")
@@ -36,7 +43,7 @@ button.bind("<1>",button_click)
 button.grid(row = r,column = c)
 c+=1
 button = tk.Button(root,text="=",font=("",30),width=4,height=2)
-button.bind("<1>",button_sum)
+button.bind("<1>",button_click)
 button.grid(row = r,column = c)
 
 root.mainloop()
