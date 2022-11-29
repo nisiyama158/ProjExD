@@ -17,13 +17,16 @@ def button_click(event):
             entry.delete(0,tk.END)
     elif txt == "AC":
         entry.delete(0,tk.END)
+    elif txt == "C":
+        ##entry.delete(int(tk.END)-1,tk.END)
+        pass
     else:
         entry.insert(tk.END,txt)
         
 
 root = tk.Tk()
 root.title("calc")
-root.geometry("380x500")
+root.geometry("500x500")
 
 entry = tk.Entry(justify="right",width=11,font=("",50))
 entry.grid(columnspan=10)
@@ -31,7 +34,7 @@ entry.grid()
 
 r,c = 1,2
 for i in range(10)[::-1]:
-    button = tk.Button(root,text=i,font=("",30),width=4,height=2)
+    button = tk.Button(root,text=i,font=("",30),width=4,height=2,bg="#ffffff")
     button.bind("<1>",button_click)
     button.grid(row = r,column = c)
     
@@ -42,14 +45,23 @@ for i in range(10)[::-1]:
         if r == 4:
             c=1
 
-button = tk.Button(root,text="+",font=("",30),width=4,height=2)
+
+li = ["AC","+","-"]
+for n,x in enumerate(li):
+    button = tk.Button(root,text=x,font=("",30),width=4,height=2,bg="#ffa0a0")
+    button.bind("<1>",button_click)
+    button.grid(row = n+1,column = 3)
+
+li2 = ["C","*","/","="]
+for m,y in enumerate(li2):
+    button = tk.Button(root,text=y,font=("",30),width=4,height=2,bg="#ffa0a0")
+    button.bind("<1>",button_click)
+    button.grid(row = m+1,column = 4)
+
+
+button = tk.Button(root,text=".",font=("",30),width=4,height=2,bg="#ffffff")
 button.bind("<1>",button_click)
-button.grid(row = 2,column = 3)
-button = tk.Button(root,text="=",font=("",30),width=4,height=2)
-button.bind("<1>",button_click)
-button.grid(row = 4,column = 3)
-button = tk.Button(root,text="AC",font=("",30),width=4,height=2)
-button.bind("<1>",button_click)
-button.grid(row = 1,column = 3)
+button.grid(row = 4,column = 2)
+
 
 root.mainloop()
