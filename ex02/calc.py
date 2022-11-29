@@ -4,13 +4,13 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     txt = btn["text"]
-    new_func(txt)
-
-def new_func(txt):
     entry.insert(tk.END,txt)
 
 def button_sum(event):
-    pass
+    isum = entry.get()
+    entry.delete(0,tk.END)
+    res = eval(isum)
+    entry.insert(tk.END, res)
 
 root = tk.Tk()
 root.title("calc")
