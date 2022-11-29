@@ -11,6 +11,12 @@ def button_click(event):
         try:
             res = eval(isum)
             entry.insert(tk.END, res)
+        except NameError:
+            entry.insert(tk.END, "error")
+            tkm.showinfo("error",f"文字列が入力されました")
+        except ZeroDivisionError:
+            entry.insert(tk.END, "error")
+            tkm.showinfo("error",f"0で割ることは出来ません")
 
         except:
             entry.insert(tk.END, "error")
