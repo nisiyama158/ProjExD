@@ -43,7 +43,6 @@ if __name__ == "__main__":
     canvas = tk.Canvas(root,width=1500,height=900,bg="black")
     canvas.pack()
 
-
     maze_lst = mm.make_maze(15,9)
     mm.show_maze(canvas,maze_lst)
 
@@ -61,4 +60,3 @@ if __name__ == "__main__":
     count_up()
     main_proc()
     root.mainloop()
-    
