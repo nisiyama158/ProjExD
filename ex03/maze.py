@@ -1,5 +1,6 @@
 import tkinter as tk
 import maze_maker as mm
+import tkinter.messagebox as tkm
 
 def key_down(event):
     global key
@@ -26,6 +27,7 @@ def main_proc():
     if cx==1350 and cy==750:
         canvas.create_image(cx,cy,image=santa_neo,tag="santa_neo")
         canvas.delete("santa")
+        tkm.showinfo("ゲームのヒント",f"ゴール！\n遊んでくれてありがとう！")
     else:
         root.after(100,main_proc)
 
@@ -34,6 +36,7 @@ if __name__ == "__main__":
     root.title("サンタが町にやってきた！")
     canvas = tk.Canvas(root,width=1500,height=900,bg="black")
     canvas.pack()
+
 
     maze_lst = mm.make_maze(15,9)
     mm.show_maze(canvas,maze_lst)
