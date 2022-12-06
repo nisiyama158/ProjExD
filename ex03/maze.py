@@ -61,3 +61,4 @@ if __name__ == "__main__":
     count_up()
     main_proc()
     root.mainloop()
+    
