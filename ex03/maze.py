@@ -1,5 +1,6 @@
 import tkinter as tk
-import tkinter.messagebox as tkm 
+import tkinter.messagebox as tkm
+import maze_maker as mm
 
 def key_down(event):
     global key
@@ -11,18 +12,21 @@ def key_up(event):
 
 def main_proc():
     global cx,cy
-    if key == "Up":cy-=20
-    if key == "Down":cy+=20
-    if key == "Left":cx-=20
-    if key == "Right":cx+=20
+    if key == "Up":cy-=5
+    if key == "Down":cy+=5
+    if key == "Left":cx-=5
+    if key == "Right":cx+=5
     canvas.coords("koukaton",cx,cy)
-    root.after(100,main_proc)
+    root.after(10,main_proc)
 
 if __name__ == "__main__":
     root = tk.Tk()
     root.title("迷えるこうかとん")
     canvas = tk.Canvas(root,width=1500,height=900,bg="black")
     canvas.pack()
+
+    maze_lst = mm.make_maze(15,9)
+    mm.show_maze(canvas,maze_lst)
 
     tori=tk.PhotoImage(file="fig/8.png")
     cx,cy = 300,400
