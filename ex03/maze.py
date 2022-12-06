@@ -1,6 +1,7 @@
 import tkinter as tk
 import maze_maker as mm
 import tkinter.messagebox as tkm
+import time
 
 def key_down(event):
     global key
@@ -10,14 +11,9 @@ def key_up(event):
     global key
     key = ""
 
-def count_up():
-    global tmr
-    tmr=tmr+1
-    root.after(1000,count_up)
-
 #キーと連動した動き
 def main_proc():
-    global cx,cy,mx,my
+    global cx,cy,mx,my,time_s,time_g
     if key == "Up"or key=="w":my-=1
     if key == "Down"or key=="s":my+=1
     if key == "Left"or key=="a":mx-=1
@@ -32,8 +28,9 @@ def main_proc():
     if cx==1350 and cy==750:
         canvas.create_image(cx,cy,image=santa_neo,tag="santa_neo")
         canvas.delete("santa")
-        tkm.showinfo("ゲームのヒント",f"ゴール！{tmr}秒でゴールしたよ！\n遊んでくれてありがとう！")
-        root.title(f"{tmr}秒でゴール！")
+        time_g =time.time()
+        tkm.showinfo("ゲームクリア",f"ゴール！{int(time_g-time_s)}秒でゴールしたよ！\n遊んでくれてありがとう！")
+        root.title(f"{int(time_g-time_s)}秒でゴール！")
     else:
         root.after(100,main_proc)
 
@@ -50,6 +47,7 @@ if __name__ == "__main__":
     santa=tk.PhotoImage(file="fig/christmas_santa.png")
     santa_neo=tk.PhotoImage(file="fig/christmas_santa_present.png")
     tmr=0
+    time_s=time.time()
     mx,my = 1,1
     cx,cy = mx*100+50,my*100+50
     canvas.create_image(1350,750,image=ie,tag="ie")
@@ -57,6 +55,5 @@ if __name__ == "__main__":
     key = ""
     root.bind("<KeyPress>",key_down)
     root.bind("<KeyRelease>",key_up)
-    count_up()
     main_proc()
     root.mainloop()
