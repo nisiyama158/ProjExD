@@ -56,7 +56,6 @@ def main():
             tori_rct.centerx -= 1
         if key_dct[pg.K_RIGHT] or key_dct[pg.K_d]:
             tori_rct.centerx += 1
-        scrn_sfc.blit(tori_sfc,tori_rct) #blit
         if check_bound(tori_rct,scrn_rct) != (+1,+1):
             if key_dct[pg.K_UP] or key_dct[pg.K_w]:
                 tori_rct.centery += 1
@@ -66,7 +65,7 @@ def main():
                 tori_rct.centerx += 1
             if key_dct[pg.K_RIGHT] or key_dct[pg.K_d]:
                 tori_rct.centerx -= 1
-            scrn_sfc.blit(tori_sfc,tori_rct)
+        scrn_sfc.blit(tori_sfc,tori_rct)
 
         vx *= rand_cic()
         vy *= rand_cic()
