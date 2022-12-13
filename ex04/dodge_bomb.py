@@ -11,7 +11,7 @@ def check_bound(obj_rct,scr_rct):
         tate = -1
     return yoko,tate
 
-def rand_cic():
+def rand_cic(): #爆弾の挙動をグチャにするための関数(0.5%)
     if random.randint(1,1000)>=996:
         return -1
     else: return +1
@@ -31,7 +31,8 @@ def main():
     scrn_sfc.blit(tori_sfc,tori_rct) #blit
 
     #爆弾処理
-    cic_sfc = pg.Surface((20,20))
+    rx,ry = 20,20
+    cic_sfc = pg.Surface((rx,ry))
     cic_sfc.set_colorkey((0, 0, 0))
     pg.draw.circle(cic_sfc, (255, 0, 0), (10,10), 10)
     cic_rct = cic_sfc.get_rect()
@@ -83,6 +84,17 @@ def main():
             pg.display.update()
             pg.time.wait(1000) #1秒wait
             return #ウィンドウの破壊
+
+        if pg.time.get_ticks() % 500 == 0: #500で割れる時間（ミリ秒）なら爆弾が大きくなる処理
+            rx,ry = rx+10,ry+10
+            cic_sfc = pg.Surface((rx,ry))
+            cic_sfc.set_colorkey((0, 0, 0))
+            pg.draw.circle(cic_sfc, (255, 0, 0), (rx/2,ry/2), rx/2)
+            cic_rct2 = cic_sfc.get_rect()
+            cic_rct2.centerx = cic_rct.centerx
+            cic_rct2.centery = cic_rct.centery
+            scrn_sfc.blit(cic_sfc, cic_rct2)
+            cic_rct = cic_rct2
 
         pg.display.update()
         clock.tick(1000)
