@@ -11,7 +11,6 @@ def check_bound(obj_rct,scr_rct):
         tate = -1
     return yoko,tate
 
-
 def main():
     clock = pg.time.Clock()
     pg.display.set_caption("逃げろ！こうかとん")
@@ -35,15 +34,6 @@ def main():
     cic_rct.centery = random.randint(0,scrn_rct.height)
     scrn_sfc.blit(cic_sfc, cic_rct)
     vx,vy = +1,+1
-    
-
-
-    
-
-
-
-
-
 
     while True:
         
@@ -52,41 +42,43 @@ def main():
             if event.type == pg.QUIT:return #ウィンドウの×を押したら終了
         
         key_dct = pg.key.get_pressed() #キー入力取得
-        if key_dct[pg.K_UP]:
+        if key_dct[pg.K_UP] or key_dct[pg.K_w]:
             tori_rct.centery -= 1
-        if key_dct[pg.K_DOWN]:
+        if key_dct[pg.K_DOWN] or key_dct[pg.K_s]:
             tori_rct.centery += 1
-        if key_dct[pg.K_LEFT]:
+        if key_dct[pg.K_LEFT] or key_dct[pg.K_a]:
             tori_rct.centerx -= 1
-        if key_dct[pg.K_RIGHT]:
+        if key_dct[pg.K_RIGHT] or key_dct[pg.K_d]:
             tori_rct.centerx += 1
         scrn_sfc.blit(tori_sfc,tori_rct) #blit
         if check_bound(tori_rct,scrn_rct) != (+1,+1):
-            if key_dct[pg.K_UP]:
+            if key_dct[pg.K_UP] or key_dct[pg.K_w]:
                 tori_rct.centery += 1
-            if key_dct[pg.K_DOWN]:
+            if key_dct[pg.K_DOWN] or key_dct[pg.K_s]:
                 tori_rct.centery -= 1
-            if key_dct[pg.K_LEFT]:
+            if key_dct[pg.K_LEFT] or key_dct[pg.K_a]:
                 tori_rct.centerx += 1
-            if key_dct[pg.K_RIGHT]:
+            if key_dct[pg.K_RIGHT] or key_dct[pg.K_d]:
                 tori_rct.centerx -= 1
             scrn_sfc.blit(tori_sfc,tori_rct)
 
-        
         cic_rct.move_ip(vx,vy)
         scrn_sfc.blit(cic_sfc, cic_rct)
         yoko,tate=check_bound(cic_rct,scrn_rct)
         vx*=yoko
         vy*=tate
 
-        if tori_rct.colliderect(cic_rct):
-            return
+        if tori_rct.colliderect(cic_rct): #爆弾に当たったとき
+            moe_sfc = pg.image.load("fig/syoukyaku_noyaki.png") #焼け野原の画像をScrface
+            moe_rct = moe_sfc.get_rect()
+            moe_rct.center=tori_rct.centerx,tori_rct.centery
+            scrn_sfc.blit(moe_sfc,moe_rct)
+            pg.display.update()
+            pg.time.wait(1000) #1秒wait
+            return #ウィンドウの破壊
 
         pg.display.update()
         clock.tick(1000)
-
-
-
 
 if __name__=="__main__":
     pg.init()
