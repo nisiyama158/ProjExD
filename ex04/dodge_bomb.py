@@ -12,9 +12,8 @@ def check_bound(obj_rct,scr_rct):
     return yoko,tate
 
 def rand_cic(): #爆弾の挙動をグチャにするための関数(0.5%)
-    if random.randint(1,1000)>=996:
-        return -1
-    else: return +1
+    if random.randint(1,1000)>=996 : return -1
+    else : return +1
 
 def main():
     clock = pg.time.Clock()
