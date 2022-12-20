@@ -56,7 +56,7 @@ class Bomb:
         self.sfc.set_colorkey((0, 0, 0))
         pg.draw.circle(self.sfc, color, (rad, rad), rad)
         self.rct = self.sfc.get_rect()
-        self.rct.centerx = random.randint(0, scr.rct.width)
+        self.rct.centerx = random.randint(0, scr.rct.width/2)
         self.rct.centery = random.randint(0, scr.rct.height)
         self.vx, self.vy = vxy
 
@@ -64,6 +64,14 @@ class Bomb:
         scr.sfc.blit(self.sfc, self.rct)
 
     def update(self, scr:Screen):
+        rans = []
+        for ran in range(2):
+            if random.randint(1,1000) >= 996:
+                rans.append(-1)
+            else:
+                rans.append(1)
+        self.vx *= rans[0]
+        self.vy *= rans[1]
         self.rct.move_ip(self.vx, self.vy)
         yoko, tate = check_bound(self.rct, scr.rct)
         self.vx *= yoko
@@ -92,7 +100,7 @@ def main():
     scr = Screen("負けるな！こうかとん", (1600,900), "fig/pg_bg.jpg")
 
     # 練習３
-    kkt = Bird("fig/6.png", 2.0, (900,400))
+    kkt = Bird("fig/6.png", 2.0, (1000,400))
     kkt.update(scr)
 
     # 練習５
@@ -121,6 +129,9 @@ def main():
         for bv in bombs:
             bv.update(scr)
             if kkt.rct.colliderect(bv.rct):
+                #root = tk.Tk()  #なんかメッセージ表示出来なくて草
+                #root.withdraw()
+                #messagebox.showinfo('げーむおーばー', f"{pg.time.get_ticks/1000}秒生き残った！")
                 moe_sfc = pg.image.load("fig/syoukyaku_noyaki.png") #焼け野原の画像をScrface
                 moe_rct = moe_sfc.get_rect()
                 moe_rct.center = kkt.rct.centerx,kkt.rct.centery
