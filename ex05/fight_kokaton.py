@@ -1,6 +1,8 @@
 import pygame as pg
 import random
 import sys
+import tkinter as tk
+from tkinter import messagebox
 
 
 class Screen:
@@ -104,7 +106,13 @@ def main():
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
-                return
+                root = tk.Tk() 
+                root.withdraw() #メッセージと一緒に出る謎のウィンドウを消すやつ
+                ret = messagebox.askyesno('確認', '本当にウィンドウを閉じますか？')
+                if ret == True: #ウィンドウを消そうとすると消すかどうか聞く
+                    ret2 = messagebox.askyesno('確認', '……マジ？')
+                    if ret2 == True: #二段構え
+                        return
 
         kkt.update(scr)
         bkd.update(scr)
@@ -116,7 +124,8 @@ def main():
             pg.display.update()
             pg.time.wait(1000)
 
-            #動画を差し込もうとしたがpygame.movieモジュールがwindows環境で動作しないらしくただの文字列と化した
+            #動画を差し込もうとしたがpygame.movieモジュールがwindows環境で動作しないらしく
+            #ただの文字列と化した図
             #pg.movie.Movie("MEME.mp4")
             #pg.Movie.play(loops=0)
             
