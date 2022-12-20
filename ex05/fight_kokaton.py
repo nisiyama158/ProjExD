@@ -89,16 +89,19 @@ def main():
     clock =pg.time.Clock()
 
     # 練習１
-    scr = Screen("逃げろ！こうかとん", (1600,900), "fig/pg_bg.jpg")
+    scr = Screen("負けるな！こうかとん", (1600,900), "fig/pg_bg.jpg")
 
     # 練習３
     kkt = Bird("fig/6.png", 2.0, (900,400))
     kkt.update(scr)
 
     # 練習５
-    sx,sy = random.choice([-1,+1]),random.choice([-1,+1])
-    bkd = Bomb((255, 0, 0), 10, (sx,sy), scr)
-    bkd.update(scr)
+    bombs = []
+    for i in range(random.randint(5,15)): #ボムの個数、色、移動方向決め
+        sx,sy = random.choice([-1,+1]),random.choice([-1,+1])
+        br,bg,bb = random.randint(0,255),random.randint(0,255),random.randint(0,255)
+        bombs.append(Bomb((br,bg,bb), 10, (sx,sy), scr))
+        #bkd.update(scr)
 
     # 練習２
     while True:        
@@ -115,21 +118,22 @@ def main():
                         return
 
         kkt.update(scr)
-        bkd.update(scr)
-        if kkt.rct.colliderect(bkd.rct):
-            moe_sfc = pg.image.load("fig/syoukyaku_noyaki.png") #焼け野原の画像をScrface
-            moe_rct = moe_sfc.get_rect()
-            moe_rct.center = kkt.rct.centerx,kkt.rct.centery
-            scr.sfc.blit(moe_sfc,moe_rct)
-            pg.display.update()
-            pg.time.wait(1000)
+        for bv in bombs:
+            bv.update(scr)
+            if kkt.rct.colliderect(bv.rct):
+                moe_sfc = pg.image.load("fig/syoukyaku_noyaki.png") #焼け野原の画像をScrface
+                moe_rct = moe_sfc.get_rect()
+                moe_rct.center = kkt.rct.centerx,kkt.rct.centery
+                scr.sfc.blit(moe_sfc,moe_rct)
+                pg.display.update()
+                pg.time.wait(1000)
 
-            #動画を差し込もうとしたがpygame.movieモジュールがwindows環境で動作しないらしく
-            #ただの文字列と化した図
-            #pg.movie.Movie("MEME.mp4")
-            #pg.Movie.play(loops=0)
+                #動画を差し込もうとしたがpygame.movieモジュールがwindows環境で動作しないらしく
+                #ただの文字列と化した図
+                #pg.movie.Movie("MEME.mp4")
+                #pg.Movie.play(loops=0)
             
-            return
+                return
 
         pg.display.update()
         clock.tick(1000)
