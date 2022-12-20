@@ -7,11 +7,11 @@ class PurchasePointPayment {
   final LocalDateTime paymentDateTime;  // 購入日時
 
   PurchasePointPayment(final Customer customer, final Comic comic) {
-  if (!customer.isEnabled()) {
+  if (customer.isEnabled()) {
     throw new IllegalArgumentException("有効な購入者ではありません。");
   }
   customerId = customer.id;
-  if (!comic.isEnabled()) {
+  if (comic.isEnabled()) {
     throw new IllegalArgumentException("現在取り扱いのできないコミックです。");
   }
   comicId = comic.id;
