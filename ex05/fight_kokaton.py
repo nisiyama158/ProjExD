@@ -79,6 +79,13 @@ class Bomb:
         self.blit(scr)
 
 
+#class boost:
+#    def __init__(self,li):
+#        key_dcts = pg.key.get_pressed()
+#        if pg.K_SPACE in key_dcts:
+#            li.pop()
+        
+
 def check_bound(obj_rct, scr_rct):
     """
     第1引数：こうかとんrectまたは爆弾rect
@@ -145,6 +152,8 @@ def main():
                 #pg.Movie.play(loops=0)
             
                 return
+
+        #boost(bombs)
 
         pg.display.update()
         clock.tick(1000)
