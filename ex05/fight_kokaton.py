@@ -1,6 +1,7 @@
-import pygame as pg
 import random
 import sys
+
+import pygame as pg
 import tkinter as tk
 from tkinter import messagebox
 
