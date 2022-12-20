@@ -21,6 +21,10 @@ class Bird:
         pg.K_DOWN:  [0, +1],
         pg.K_LEFT:  [-1, 0],
         pg.K_RIGHT: [+1, 0],
+        pg.K_w:    [0, -1],
+        pg.K_s:  [0, +1],
+        pg.K_a:  [-1, 0],
+        pg.K_d: [+1, 0],
     }
 
     def __init__(self, img_path, ratio, xy):
@@ -90,7 +94,8 @@ def main():
     kkt.update(scr)
 
     # 練習５
-    bkd = Bomb((255, 0, 0), 10, (+1, +1), scr)
+    sx,sy = random.choice([-1,+1]),random.choice([-1,+1])
+    bkd = Bomb((255, 0, 0), 10, (sx,sy), scr)
     bkd.update(scr)
 
     # 練習２
@@ -104,6 +109,17 @@ def main():
         kkt.update(scr)
         bkd.update(scr)
         if kkt.rct.colliderect(bkd.rct):
+            moe_sfc = pg.image.load("fig/syoukyaku_noyaki.png") #焼け野原の画像をScrface
+            moe_rct = moe_sfc.get_rect()
+            moe_rct.center = kkt.rct.centerx,kkt.rct.centery
+            scr.sfc.blit(moe_sfc,moe_rct)
+            pg.display.update()
+            pg.time.wait(1000)
+
+            #動画を差し込もうとしたがpygame.movieモジュールがwindows環境で動作しないらしくただの文字列と化した
+            #pg.movie.Movie("MEME.mp4")
+            #pg.Movie.play(loops=0)
+            
             return
 
         pg.display.update()
