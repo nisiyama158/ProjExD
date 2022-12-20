@@ -23,10 +23,10 @@ class Bird:
         pg.K_DOWN:  [0, +1],
         pg.K_LEFT:  [-1, 0],
         pg.K_RIGHT: [+1, 0],
-        pg.K_w:    [0, -1],
-        pg.K_s:  [0, +1],
-        pg.K_a:  [-1, 0],
-        pg.K_d: [+1, 0],
+        pg.K_w:     [0, -1],
+        pg.K_s:     [0, +1],
+        pg.K_a:     [-1, 0],
+        pg.K_d:     [+1, 0],
     }
 
     def __init__(self, img_path, ratio, xy):
