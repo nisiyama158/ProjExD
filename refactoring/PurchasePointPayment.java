@@ -18,6 +18,8 @@ class PurchasePointPayment {
   if (customer.possessionPoint.amount < comic.currentPurchasePoint.amount) {
     throw new RuntimeException("所持ポイントが不足しています。");
   }
+  customerId = customer.id;
+  comicId = comic.id;
   consumptionPoint = comic.currentPurchasePoint;
   paymentDateTime = LocalDateTime.now();
   }
