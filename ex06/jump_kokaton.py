@@ -1,6 +1,7 @@
 import pygame as pg
 import random
 import sys
+import os
 
 
 class Screen:#背景
@@ -75,8 +76,15 @@ class Wall:#壁
 #スコアをテキストファイルに記入する関数（私が作成）
 def score():
     score = str(pg.time.get_ticks() / 1000)
-    with open("score.txt","w",encoding="utf_8") as f:
-        f.write(score)
+    if os.path.exists("score.txt") == False:
+        with open("score.txt","w",encoding="utf_8") as f:
+            f.write(score)
+    else:
+        with open("score.txt","r",encoding="utf_8") as f:
+            line = f.read()
+            if float(line) < float(score):
+                with open("score.txt","w",encoding="utf_8") as f:
+                    f.write(score)
 
 
 #メイン
