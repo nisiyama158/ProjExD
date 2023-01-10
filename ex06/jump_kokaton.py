@@ -31,7 +31,7 @@ class Bird:#こうかとん
     def blit(self, scr): #出力
         scr.sfc.blit(self.sfc, self.rct)
 
-    #スペースを押したときにこうかとんが跳ねる関数（私が改良しました）
+    #スペースを押したときにこうかとんが跳ねる関数（c0a21166が改良）
     def update(self, scr):
         key_dct = pg.key.get_pressed()
         if key_dct[pg.K_SPACE] and self.kis == False: #加速度決め（連続押しは不可）
@@ -73,7 +73,7 @@ class Wall:#壁
         self.blit(scr)
 
 
-#スコアをテキストファイルに記入する関数（私が作成）
+#スコアをテキストファイルに記入する関数（c0a21166が作成）
 def score():
     score = str(pg.time.get_ticks() / 1000)
     if os.path.exists("score.txt") == False:
