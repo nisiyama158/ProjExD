@@ -3,6 +3,14 @@ import random
 import sys
 
 #設定
+# クロックのインスタンスを生成
+clock = pg.time.Clock()
+# fpsを設定、ここでは1秒間に60フレームを描画
+fps = 60
+# ゲーム画面の横幅
+screen_width = 1600
+# ゲーム画面の縦幅
+screen_height = 900
 # 地面のスクロールを管理する変数
 ground_scroll = 0
 # スクロールの速さ
@@ -21,6 +29,8 @@ last_pipe = pg.time.get_ticks() - pipe_frequency
 score = 0
 # 土管の通過フラグ
 pass_pipe = False
+#リスタートボタン
+buttom_img = pg.image.load("fig/restart.png")
 
 
 
@@ -70,7 +80,7 @@ class Bird:
 
 
 #土管
-class tower:
+class tower(pg.sprite.Sprite):
     def __init__(self,img,x,y,pos):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(img)
@@ -93,13 +103,55 @@ class tower:
             self.kill()
 
 
+class Button():
+    def __init__(self, x, y, image):
+        """
+        初期化関数、インスタンス生成時に呼ばれる関数
+        """
+        # 画像を入れる変数
+        self.image = image
+        # ボタン画像を囲む四角形
+        self.rect = self.image.get_rect()
+        # ボタンの左上の座標を指定
+        self.rect.topleft = (x, y)
 
+    def draw(self):
+        """
+        描画関数
+        """
+        # アクションフラグ
+        action = False
+
+        # マウスの座標
+        pos = pg.mouse.get_pos()
+
+        # ボタンのクリック判定。マウスポインタの座標とボタン画像を囲む四角形との衝突判定。collide=衝突
+        if self.rect.collidepoint(pos):
+        # マウスをクリックした状態なら
+            if pg.mouse.get_pressed()[0] == 1:
+                # アクションフラグを更新
+                action = True
+        # 指定の場所にボタン画像を描画
+        Screen.blit(self.image, (self.rect.x, self.rect.y))
+
+
+    # アクションフラグを返す
+        return action
 
 
 def main():
     clock =pg.time.Clock()
     fps = 60
+    bird_group = pg.sprite.Group()
+    pipe_group = pg.sprite.Group()
     scr = Screen("Flappy bird", (1600,900), "fig/pg_bg.jpg")
+    flappy = Bird("fig/bird1.png",(100, int(900 / 2)))
+    bird_group.add(flappy)
+    button = Button(1600 // 2 - 50, 900 // 2 - 100, buttom_img)
+
+    while True:
+        Screen.blit()
+
 
 
 if __name__ == "__main__":
